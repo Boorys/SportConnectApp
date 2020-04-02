@@ -32,8 +32,15 @@ public class UserEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<OpinionEntity> opinions;
 
-   @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<MainTypSportEntity> mainTypSportEntities;
+
+   @ManyToMany()
+   @JoinTable(
+           name="user_main_typ_sport",
+           joinColumns = @JoinColumn(name = "user_id"),
+           inverseJoinColumns = @JoinColumn(name = "main_typ_sport_id")
+   )
+    private List<MainTypSportEntity> mainTypSports;
+
 
 
     public String getPassword() {
@@ -44,12 +51,12 @@ public class UserEntity {
         this.password = password;
     }
 
-    public List<MainTypSportEntity> getMainTypSportEntities() {
-        return mainTypSportEntities;
+    public List<MainTypSportEntity> getMainTypSports() {
+        return mainTypSports;
     }
 
-    public void setMainTypSportEntities(List<MainTypSportEntity> mainTypSportEntities) {
-        this.mainTypSportEntities = mainTypSportEntities;
+    public void setMainTypSports(List<MainTypSportEntity> mainTypSports) {
+        this.mainTypSports = mainTypSports;
     }
 
     public long getId() {

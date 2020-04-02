@@ -16,15 +16,23 @@ public class MainTypSportEntity {
     @Column
     private String mainNameOfSport;
 
-    @ManyToOne
-    @JoinColumn
-    private UserEntity user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "mainTypSport")
     private List<PreciseDisciplineEntity> mainTypSports;
 
     @ManyToMany(mappedBy = "mainTypSports")
     List<LocationEntity> locations;
+
+    @ManyToMany(mappedBy = "mainTypSports")
+    List<UserEntity> users;
+
+    public List<UserEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserEntity> users) {
+        this.users = users;
+    }
 
     public List<PreciseDisciplineEntity> getMainTypSports() {
         return mainTypSports;
@@ -66,11 +74,5 @@ public class MainTypSportEntity {
         this.mainNameOfSport = mainNameOfSport;
     }
 
-    public UserEntity getUser() {
-        return user;
-    }
 
-    public void setUser(UserEntity user) {
-        this.user = user;
-    }
 }
