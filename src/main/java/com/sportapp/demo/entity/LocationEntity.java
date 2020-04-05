@@ -18,7 +18,7 @@ public class LocationEntity {
     @Column
     private String streetNumber;
     @Column
-    private String demaprtment;
+    private String department;
     @Column
     private String country;
     @Column
@@ -68,12 +68,12 @@ public class LocationEntity {
         this.streetNumber = streetNumber;
     }
 
-    public String getDemaprtment() {
-        return demaprtment;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDemaprtment(String demaprtment) {
-        this.demaprtment = demaprtment;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getCountry() {

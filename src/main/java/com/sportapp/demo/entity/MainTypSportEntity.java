@@ -11,7 +11,7 @@ public class MainTypSportEntity {
     private long id;
 
     @Column
-    private String MainTypSportEntityId;
+    private String mainTypSportEntityId;
 
     @Column
     private String mainNameOfSport;
@@ -25,6 +25,7 @@ public class MainTypSportEntity {
 
     @ManyToMany(mappedBy = "mainTypSports")
     List<UserEntity> users;
+
 
     public List<UserEntity> getUsers() {
         return users;
@@ -59,11 +60,11 @@ public class MainTypSportEntity {
     }
 
     public String getMainTypSportEntityId() {
-        return MainTypSportEntityId;
+        return mainTypSportEntityId;
     }
 
     public void setMainTypSportEntityId(String mainTypSportEntityId) {
-        MainTypSportEntityId = mainTypSportEntityId;
+        mainTypSportEntityId = mainTypSportEntityId;
     }
 
     public String getMainNameOfSport() {

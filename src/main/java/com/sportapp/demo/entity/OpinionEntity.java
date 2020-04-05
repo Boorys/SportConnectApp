@@ -1,6 +1,5 @@
 package com.sportapp.demo.entity;
 
-import org.w3c.dom.Text;
 import javax.persistence.*;
 
 @Entity
