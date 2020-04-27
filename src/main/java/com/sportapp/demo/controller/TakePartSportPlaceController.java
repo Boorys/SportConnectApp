@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.text.ParseException;
+
 
 @RestController
 public class TakePartSportPlaceController {
@@ -21,15 +22,10 @@ public class TakePartSportPlaceController {
 
     @PostMapping(path="/add/location",consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseStatus(value = HttpStatus.CREATED,reason = "Add location")
-    public void addSportWishForUser(@RequestBody LocationPostDto locationPostDto)  {
+    public void addSportWishForUser(@RequestBody LocationPostDto locationPostDto) throws ParseException {
 
         locationService.saveLocation(locationPostDto);
     }
-
-
-
-
-
 
 
 }
