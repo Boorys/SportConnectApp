@@ -10,18 +10,15 @@ public class LocationPostDto {
     private String department;
     private String street;
     private String streetNumber;
-    private short hour;
+    private byte hour;
+    private byte minute;
+    private byte day;
+    private byte month;
+    private short year;
 
     public LocationPostDto() {
     }
 
-    public short getHour() {
-        return hour;
-    }
-
-    public void setHour(short hour) {
-        this.hour = hour;
-    }
 
     public String getUserId() {
         return userId;
@@ -77,5 +74,45 @@ public class LocationPostDto {
 
     public void setStreetNumber(String streetNumber) {
         this.streetNumber = streetNumber;
+    }
+
+    public byte getHour() {
+        return hour;
+    }
+
+    public void setHour(byte hour) {
+        this.hour = hour;
+    }
+
+    public byte getMinute() {
+        return minute;
+    }
+
+    public void setMinute(byte minute) {
+        this.minute = minute;
+    }
+
+    public byte getDay() {
+        return day;
+    }
+
+    public void setDay(byte day) {
+        this.day = day;
+    }
+
+    public byte getMonth() {
+        return month;
+    }
+
+    public void setMonth(byte month) {
+        this.month = month;
+    }
+
+    public short getYear() {
+        return year;
+    }
+
+    public void setYear(short year) {
+        this.year = year;
     }
 }
