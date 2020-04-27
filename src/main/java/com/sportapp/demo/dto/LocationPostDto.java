@@ -8,8 +8,6 @@ public class LocationPostDto {
     private String city;
     private String country;
     private String department;
-    private float lang;
-    private float lat;
     private String street;
     private String streetNumber;
     private short hour;
@@ -63,22 +61,6 @@ public class LocationPostDto {
 
     public void setDepartment(String department) {
         this.department = department;
-    }
-
-    public float getLang() {
-        return lang;
-    }
-
-    public void setLang(float lang) {
-        this.lang = lang;
-    }
-
-    public float getLat() {
-        return lat;
-    }
-
-    public void setLat(float lat) {
-        this.lat = lat;
     }
 
     public String getStreet() {
