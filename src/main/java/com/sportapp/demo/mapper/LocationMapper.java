@@ -8,4 +8,5 @@ import org.mapstruct.Mapper;
 public interface LocationMapper {
 
     LocationEntity locationPostDtoTolocationEntity(LocationPostDto locationPostDto);
+
 }
