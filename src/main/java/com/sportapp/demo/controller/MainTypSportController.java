@@ -23,7 +23,7 @@ public class MainTypSportController {
         this.mainTypSportService = mainTypSportService;
     }
 
-    @GetMapping(path = "/get/location/all",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/get/main/typ/sports",produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public List getMainTypSport()
     {
