@@ -1,7 +1,7 @@
 package com.sportapp.demo.entity;
 
 import javax.persistence.*;
-import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class TimeTableEntity {
@@ -13,25 +13,15 @@ public class TimeTableEntity {
     private String timeTableId;
 
     @Column
-    private short hour;
-
-    @Column
-    private Calendar date;
+    private Date date;
 
     @ManyToOne
     @JoinColumn
     private LocationEntity location;
 
+
     public long getId() {
         return id;
-    }
-
-    public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
-        this.date = date;
     }
 
     public void setId(long id) {
@@ -46,12 +36,12 @@ public class TimeTableEntity {
         this.timeTableId = timeTableId;
     }
 
-    public short getHour() {
-        return hour;
+    public Date getDate() {
+        return date;
     }
 
-    public void setHour(short hour) {
-        this.hour = hour;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public LocationEntity getLocation() {
