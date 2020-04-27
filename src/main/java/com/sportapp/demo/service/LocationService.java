@@ -12,6 +12,7 @@ import com.sportapp.demo.mapper.LocationMapper;
 import com.sportapp.demo.mapper.TimeTableMapper;
 import com.sportapp.demo.repository.LocationRepository;
 import com.sportapp.demo.repository.MainTypSportRepository;
+import com.sportapp.demo.repository.TimeTableRepository;
 import com.sportapp.demo.repository.UserRepository;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,14 +20,15 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @Service
 public class LocationService {
-
 
     private UserRepository userRepository;
 
@@ -40,19 +42,23 @@ public class LocationService {
 
     private RestTemplate restTemplate;
 
+    private TimeTableRepository timeTableRepository;
+
     @Autowired
-    public LocationService(UserRepository userRepository, MainTypSportRepository mainTypSportRepository, LocationMapper locationMapper, LocationRepository locationRepository, TimeTableMapper timeTableMapper, RestTemplate restTemplate) {
+    public LocationService(UserRepository userRepository, MainTypSportRepository mainTypSportRepository, LocationMapper locationMapper,
+                           LocationRepository locationRepository, TimeTableMapper timeTableMapper, RestTemplate restTemplate, TimeTableRepository timeTableRepository) {
         this.userRepository = userRepository;
         this.mainTypSportRepository = mainTypSportRepository;
         this.locationMapper = locationMapper;
         this.locationRepository = locationRepository;
         this.timeTableMapper = timeTableMapper;
         this.restTemplate = restTemplate;
+        this.timeTableRepository = timeTableRepository;
     }
 
 
     @Transactional
-    public void saveLocation(LocationPostDto locationPostDto) {
+    public void saveLocation(LocationPostDto locationPostDto) throws ParseException {
 
         UserEntity userEntity = userRepository.findByUserId(locationPostDto.getUserId());
         GpsDto gpsDto = new GpsDto();
@@ -74,11 +80,23 @@ public class LocationService {
         LocationEntity locationEntity = locationMapper.locationPostDtoTolocationEntity(locationPostDto);
         locationEntity.setLang(gpsDto.getLang());
         locationEntity.setLat(gpsDto.getLat());
+
         TimeTableEntity timeTableEntity = timeTableMapper.locationPostDtoToTimeTableEntity(locationPostDto);
 
+        timeTableEntity.setDate(getDate(locationPostDto));
+
         saveMainTypSportToUser(mainTypSportEntity, userEntity);
+
         saveLocationToMainTypSport(locationEntity, timeTableEntity, mainTypSportEntity);
     }
+
+    private Date getDate(LocationPostDto locationPostDto) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+        Calendar calendar = new GregorianCalendar(locationPostDto.getYear(), locationPostDto.getMonth(), locationPostDto.getDay(), locationPostDto.getHour(), locationPostDto.getMinute());
+
+        return calendar.getTime();
+    }
+
 
     private GpsDto getLocation(String country, String city, String street, String streetNumber) throws JSONException {
 
@@ -124,7 +142,8 @@ public class LocationService {
             timeTableEntities = new ArrayList<>();
         }
         timeTableEntities.add(timeTableEntity);
-        locationEntity.setTimeTableEntities(timeTableEntities);
+        timeTableEntity.setLocation(locationEntity);
+        timeTableRepository.save(timeTableEntity);
         locationRepository.save(locationEntity);
 
     }
