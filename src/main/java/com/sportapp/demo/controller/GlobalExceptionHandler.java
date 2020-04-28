@@ -2,6 +2,7 @@ package com.sportapp.demo.controller;
 
 import com.sportapp.demo.exception.MainTypSportExistException;
 import com.sportapp.demo.exception.UserExistException;
+import org.json.JSONException;
 import org.springframework.hateoas.mediatype.vnderrors.VndErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     {
         return error(e, HttpStatus.CONFLICT,"MainTypSportExist not found");
     }
+
+
 
 
     private ResponseEntity<VndErrors> error(final Exception exception, final HttpStatus httpStatus, final String logRef) {
